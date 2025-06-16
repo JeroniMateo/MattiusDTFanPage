@@ -9,17 +9,17 @@
   </div>
   <div class="carousel-inner w-50 ">
     <div  class="carousel-item active">
-      <img  src="../../assets/img/carrusel1.webp" class="d-block w-100" alt="...">
+      <img  src="../../assets/img/CamisetaNegraCentral.webp" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
       </div>
     </div>
     <div  class="carousel-item">
-      <img src="../../assets/img/carrusel2.webp" class="d-block w-100" alt="...">
+      <img src="../../assets/img/SudaderaAzul.webp" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
       </div>
     </div>
     <div class="carousel-item">
-      <img  src="../../assets/img/carrusel3.webp" class="d-block w-100" alt="...">
+      <img  src="../../assets/img/SudaderaGrisJuvenil.webp" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
       </div>
     </div>
