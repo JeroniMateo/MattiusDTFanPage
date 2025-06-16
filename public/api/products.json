@@ -1,0 +1,30 @@
+[
+  {
+    "id": 0,
+    "img": "fruits.webp",
+    "name": "Hazelnut Butter and Coffee Meringues",
+    "price": 5,
+    "info": "Hazelnut Butter and Coffee Meringues balls"
+  },
+  {
+    "id": 1,
+    "img": "pastries.webp",
+    "name": "Apple cake",
+    "price": 6,
+    "info": "pieces Apple Vegan Cake"
+  },
+  {
+    "id": 2,
+    "img": "comida.webp",
+    "name": "Philadelphia No Bake Cheesecake",
+    "price": 6,
+    "info": "Cheese Philadelphia No Bake Cheesecake tartlet"
+  },
+  {
+    "id": 3,
+    "img": "cosmetics.webp",
+    "name": "Vegan Cookies and Bars",
+    "price": 3,
+    "info": "Minipieces Peanut Butter Chocolate Chip Cookie Bars"
+  }
+]
