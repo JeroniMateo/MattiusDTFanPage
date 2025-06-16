@@ -8,7 +8,7 @@
         >
           <div class="card p-2" style="width: 18rem">
             <img
-              src="	https://i.blogs.es/45ba14/carrot-cake-fitness1/1366_2000.jpg"
+              src="../../assets/img/Taza.webp"
               class="card-img-top"
               alt="..." width="600px"
             />
@@ -38,7 +38,7 @@
         >
           <div class="card p-2" style="width: 18rem">
             <img
-              src="https://i.blogs.es/d73fac/mousse-fresas1/1366_2000.jpg"
+              src="../../assets/img/Bolsa.webp"
               class="card-img-top"
               alt="..." width="600px"
             />
@@ -66,7 +66,7 @@
         >
           <div class="card p-2" style="width: 18rem">
             <img
-              src="https://i.blogs.es/12d615/mango-20curd/1366_2000.jpg"
+              src="../../assets/img/Pegatinas.webp"
               class="card-img-top"
               alt="..." width="600px"
             />

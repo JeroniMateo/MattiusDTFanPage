@@ -2,29 +2,127 @@
   {
     "id": 0,
     "img": "Bolsa.webp",
-    "name": "Hazelnut Butter and Coffee Meringues",
-    "price": 5,
-    "info": "Hazelnut Butter and Coffee Meringues balls"
+    "name": "Bolsa Mattius DT",
+    "price": 6,
+    "info": "Bolsa reutilizable de tela con diseño exclusivo",
+    "category": "complementos",
+    "color": "beige",
+    "stock": 20
   },
   {
     "id": 1,
     "img": "Botella.webp",
-    "name": "Apple cake",
-    "price": 6,
-    "info": "pieces Apple Vegan Cake"
+    "name": "Botella Negra",
+    "price": 8,
+    "info": "Botella deportiva negra con logo Mattius",
+    "category": "complementos",
+    "color": "negro",
+    "stock": 15
   },
   {
     "id": 2,
-    "img": "Pegatinas.webp",
-    "name": "Philadelphia No Bake Cheesecake",
-    "price": 6,
-    "info": "Cheese Philadelphia No Bake Cheesecake tartlet"
+    "img": "BotellaBlanca.webp",
+    "name": "Botella Blanca",
+    "price": 8,
+    "info": "Botella blanca reutilizable con diseño personalizado",
+    "category": "complementos",
+    "color": "blanco",
+    "stock": 18
   },
   {
     "id": 3,
+    "img": "CamiestaNegra.webp",
+    "name": "Camiseta Negra Básica",
+    "price": 15,
+    "info": "Camiseta negra de algodón con logo discreto",
+    "category": "ropa",
+    "color": "negro",
+    "size": "M",
+    "stock": 10
+  },
+  {
+    "id": 4,
+    "img": "CamisetaNegraCentral.webp",
+    "name": "Camiseta Logo Central",
+    "price": 18,
+    "info": "Camiseta negra con logo centrado en el pecho",
+    "category": "ropa",
+    "color": "negro",
+    "size": "L",
+    "stock": 12
+  },
+  {
+    "id": 5,
+    "img": "Cantimplora.jpg",
+    "name": "Cantimplora Aventurera",
+    "price": 10,
+    "info": "Cantimplora de aluminio para viajes y deportes",
+    "category": "complementos",
+    "color": "gris",
+    "stock": 8
+  },
+  {
+    "id": 6,
+    "img": "Pegatinas.webp",
+    "name": "Pack de Pegatinas",
+    "price": 4,
+    "info": "Pack de pegatinas exclusivas del canal",
+    "category": "complementos",
+    "color": "varios",
+    "stock": 25
+  },
+  {
+    "id": 7,
     "img": "SudaderaAzul.webp",
-    "name": "Vegan Cookies and Bars",
-    "price": 3,
-    "info": "Minipieces Peanut Butter Chocolate Chip Cookie Bars"
+    "name": "Sudadera Azul",
+    "price": 25,
+    "info": "Sudadera azul cómoda y cálida con logo bordado",
+    "category": "ropa",
+    "color": "azul",
+    "size": "L",
+    "stock": 14
+  },
+  {
+    "id": 8,
+    "img": "SudaderaGrisJuvenil.webp",
+    "name": "Sudadera Gris Juvenil",
+    "price": 22,
+    "info": "Diseño juvenil, ideal para el día a día",
+    "category": "ropa",
+    "color": "gris",
+    "size": "M",
+    "stock": 11
+  },
+  {
+    "id": 9,
+    "img": "SudaderaNegra.webp",
+    "name": "Sudadera Negra Unisex",
+    "price": 25,
+    "info": "Estilo urbano y versátil",
+    "category": "ropa",
+    "color": "negro",
+    "size": "XL",
+    "stock": 9
+  },
+  {
+    "id": 10,
+    "img": "SudaderaNegraHombre.webp",
+    "name": "Sudadera Negra Hombre",
+    "price": 25,
+    "info": "Versión masculina con ajuste clásico",
+    "category": "ropa",
+    "color": "negro",
+    "size": "L",
+    "stock": 13
+  },
+  {
+    "id": 11,
+    "img": "Taza.webp",
+    "name": "Taza Mattius DT",
+    "price": 7,
+    "info": "Taza de cerámica personalizada",
+    "category": "complementos",
+    "color": "blanco",
+    "stock": 20
   }
 ]

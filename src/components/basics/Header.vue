@@ -17,6 +17,7 @@
               class="img-fluid"
               src="../../assets/img/xayona.webp"
               alt=""
+              width="150px" height="100px"
           />
         </router-link>
         <button
