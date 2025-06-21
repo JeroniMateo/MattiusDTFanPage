@@ -54,6 +54,15 @@
             <li class="nav-item">
               <router-link class="nav-link text-secondary mx-2" to="#">Services</router-link>
             </li>
+            <li class="nav-item">
+              <button>
+                <router-link class="nav-link text-secondary mx-2" to="/login">Login</router-link>
+              </button>
+              <button>
+                <router-link class="nav-link text-secondary mx-2" to="/signup">SignUp</router-link>
+              </button>
+              
+            </li>
           </ul>
         </div>
       </div>
