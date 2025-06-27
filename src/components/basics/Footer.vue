@@ -1,36 +1,69 @@
 <template>
-<div class="conainer" id="footer">
- <footer class="container w-75" style="padding-bottom: 150px">
-    <div class="row align-items-center" id="footer">
-        <div class="col-xl-4 col-lg-6 d-flex justify-content-evenly my-2 py-1" style="font-size: 12px">
-            <a><p>Home</p></a>
-            <a><p>About</p></a>
-            <a><p>Blog</p></a>
-            <a><p>Gallery</p></a>
+  <footer class="bg-dark text-light pt-4 mt-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Logo e info -->
+        <div class="col-md-4 text-center mb-3">
+          <img src="../../assets/img/logo.webp" alt="Logo Mattius DT" class="mb-2" style="height: 60px" />
+          <h5 class="fw-bold">Mattius DT Fan Shop</h5>
+          <p class="small">Deportes, Gameplays, Aventuras y más</p>
         </div>
-        <div class="col-xl-4 col-lg-6 text-center py-1 my-2">
-            <p style="font-size: 12px">© Copyright © 2011. Company name all rights reserved</p>
+
+        <!-- Navegación -->
+        <div class="col-md-4 text-center mb-3" id="footer-nav">
+          <ul class="list-unstyled">
+            <li><router-link to="/" class="footer-link">Inicio</router-link></li>
+            <li><router-link to="/catalog" class="footer-link">Catálogo</router-link></li>
+            <li><router-link to="/about" class="footer-link">Sobre mí</router-link></li>
+            <li><router-link to="/contact" class="footer-link">Contacto</router-link></li>
+            <li><router-link to="/social" class="footer-link">Redes Sociales</router-link></li>
+          </ul>
         </div>
-        <div class="col-xl-4 col-lg-12 text-center d-flex flex-row justify-content-center align-items-center my-2 py-1">
-            <a class="nav-link p-0"><i class="fab fa-facebook-square mx-4" style="font-size: xx-large"></i></a>
-            <a class="nav-link p-0"><i class="fab fa-twitter-square mx-4" style="font-size: xx-large"></i></a>
-            <a class="nav-link p-0"><i class="fab fa-google-plus-square mx-4" style="font-size: xx-large"></i></a>
+
+        <!-- Redes sociales -->
+        <div class="col-md-4 text-center mb-3">
+          <div class="d-flex justify-content-center gap-3">
+            <a href="https://www.youtube.com/@mmattiusdt" target="_blank"><i class="fab fa-youtube fa-2x text-danger"></i></a>
+            <a href="https://www.twitch.tv/mattius_dt" target="_blank"><i class="fab fa-twitch fa-2x text-info"></i></a>
+            <a href="https://www.tiktok.com/@mattius_dt" target="_blank"><i class="fab fa-tiktok fa-2x text-white"></i></a>
+            <a href="https://x.com/MattiusDT2" target="_blank"><i class="fab fa-twitter fa-2x text-light"></i></a>
+            <a href="https://www.instagram.com/mattius_dt/" target="_blank"><i class="fab fa-instagram fa-2x text-warning"></i></a>
+            <a href="https://discord.com/invite/56HWrAP9AT" target="_blank"><i class="fab fa-discord fa-2x text-secondary"></i></a>
+          </div>
         </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="text-center py-3 mt-3 border-top border-secondary">
+        <p class="mb-0 small">&copy; 2025 Mattius DT. Todos los derechos reservados.</p>
+      </div>
     </div>
-</footer>
-</div>
+  </footer>
 </template>
 
 <script>
 export default {
-    name:"Footer",
-
-}
+  name: "Footer",
+};
 </script>
 
 <style scoped>
-div.container-fluid{
-    height: 2vh;
-    font-size: 1vh;
+.footer-link {
+  color: #ffa500;
+  text-decoration: none;
+  display: block;
+  margin: 5px 0;
 }
+
+.footer-link:hover {
+  color: #fff;
+}
+
+#footer-nav {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    color:aqua}
 </style>
