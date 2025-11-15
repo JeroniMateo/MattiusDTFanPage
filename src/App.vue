@@ -1,43 +1,12 @@
 <template>
-  <Header/>
-  <router-view/>
-  <Footer/>
+  <div class="d-flex flex-column min-vh-100">
+    <NavBar />
+    <router-view class="flex-grow-1" />
+    <Footer />
+  </div>
 </template>
 
-<script>
-import Header from '@/components/basics/Header.vue'
-import Footer from '@/components/basics/Footer.vue'
-export default {
-  name: 'App',
-  components: {
-    Header,
-    Footer
-  }
-}
+<script setup>
+import NavBar from './components/NavBar.vue'
+import Footer from './components/Footer.vue'
 </script>
-<style>
-body{
-   background: url("../src/assets/img/bg-body.webp");
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
