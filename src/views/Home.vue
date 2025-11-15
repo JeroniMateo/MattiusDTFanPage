@@ -8,8 +8,8 @@
       <b-container>
         <h2 class="text-center mb-4">Mis Plataformas</h2>
         <b-row class="g-4 justify-content-center">
-          <b-col md="3" v-for="platform in platforms" :key="platform.name">
-            <b-card :title="platform.name" class="text-center h-100">
+          <b-col md="3" v-for="platform in platforms" :key="platform.name" data-aos="fade-up">
+            <b-card :title="platform.name" class="text-center h-100 hover-card">
               <img :src="platform.img" :alt="platform.name" class="mb-3" style="height: 80px;" />
               <p>{{ platform.desc }}</p>
               <a :href="platform.link" target="_blank" class="btn btn-warning">Visitar</a>
@@ -24,8 +24,8 @@
       <b-container>
         <h2 class="text-center mb-4">Eventos recientes</h2>
         <b-row class="g-4">
-          <b-col md="4" v-for="event in events" :key="event.title">
-            <b-card :title="event.title" class="h-100">
+          <b-col md="4" v-for="event in events" :key="event.title" data-aos="fade-up">
+            <b-card :title="event.title" class="h-100 hover-card">
               <img :src="event.img" :alt="event.title" class="mb-3" style="height: 150px; object-fit: cover;" />
               <p>{{ event.desc }}</p>
               <small class="text-muted">{{ event.date }}</small>
@@ -40,8 +40,8 @@
       <b-container>
         <h2 class="text-center mb-4">Tienda destacada</h2>
         <b-row class="g-4">
-          <b-col md="3" v-for="product in products" :key="product.name">
-            <b-card :title="product.name" class="text-center h-100">
+          <b-col md="3" v-for="product in products" :key="product.name" data-aos="fade-up">
+            <b-card :title="product.name" class="text-center h-100 hover-card">
               <img :src="product.img" :alt="product.name" class="mb-3" style="height: 120px; object-fit: cover;" />
               <p>{{ product.desc }}</p>
               <b-button variant="warning">Comprar</b-button>
@@ -83,18 +83,19 @@ h2 {
   font-weight: 700;
 }
 
-section {
-  scroll-margin-top: 70px; /* si navbar fijo */
-}
-/* Cards con efecto hover */
-.b-card {
+/* Cards hover */
+.hover-card {
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
 }
 
-.b-card:hover {
+.hover-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
 }
 
+/* Secciones */
+section {
+  scroll-margin-top: 70px; /* si navbar fijo */
+}
 </style>
