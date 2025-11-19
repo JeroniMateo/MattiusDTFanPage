@@ -38,15 +38,16 @@ const cart = useCartStore()
 
 // Datos de ejemplo
 const products = ref([
-  { id: 1, name: 'Camiseta Mattius DT', price: 25, category: 'Camisetas', image: '/img/camisa1.webp' },
-  { id: 2, name: 'Sudadera Mattius DT', price: 45, category: 'Sudaderas', image: '/img/sudadera1.webp' },
-  { id: 3, name: 'Taza Oficial', price: 15, category: 'Accesorios', image: '/img/taza1.webp' },
-  { id: 4, name: 'Gorra Mattius DT', price: 20, category: 'Accesorios', image: '/img/gorra1.webp' },
-  { id: 5, name: 'Edición Limitada Camiseta', price: 35, category: 'Ediciones Limitadas', image: '/img/camisa2.webp' },
-  { id: 6, name: 'Sudadera Negra', price: 50, category: 'Sudaderas', image: '/img/sudadera2.webp' },
-  { id: 7, name: 'Taza Coleccionista', price: 18, category: 'Accesorios', image: '/img/taza2.webp' },
-  { id: 8, name: 'Gorra Oficial', price: 22, category: 'Accesorios', image: '/img/gorra2.webp' },
+  { id: 1, name: 'Camiseta Mattius DT', price: 25, category: 'Camisetas', image: new URL('@/assets/img/CamisetaNegraCentral.webp', import.meta.url).href },
+  { id: 2, name: 'Sudadera Mattius DT', price: 45, category: 'Sudaderas', image: new URL('@/assets/img/SudaderaAzul.webp', import.meta.url).href },
+  { id: 3, name: 'Taza Oficial', price: 15, category: 'Accesorios', image: new URL('@/assets/img/Taza.webp', import.meta.url).href },
+  { id: 4, name: 'Sudadera Joven', price: 20, category: 'Accesorios', image: new URL('@/assets/img/SudaderaGrisJuvenil.webp', import.meta.url).href },
+  { id: 5, name: 'Edición Limitada Botella', price: 35, category: 'Ediciones Limitadas', image: new URL('@/assets/img/Botella.webp', import.meta.url).href },
+  { id: 6, name: 'Sudadera Negra', price: 50, category: 'Sudaderas', image: new URL('@/assets/img/SudaderaNegra.webp', import.meta.url).href },
+  { id: 7, name: 'Pegatinas Coleccionista', price: 18, category: 'Accesorios', image: new URL('@/assets/img/Pegatinas.webp', import.meta.url).href },
+  { id: 8, name: 'Bolsa Oficial', price: 22, category: 'Accesorios', image: new URL('@/assets/img/Bolsa.webp', import.meta.url).href },
 ])
+
 
 // Filtros y búsqueda
 const searchQuery = ref('')
@@ -92,7 +93,7 @@ const paginatedProducts = computed(() => {
 // Eventos
 const handleSearch = (query) => { searchQuery.value = query; currentPage.value = 1 }
 const handleFilter = (filters) => { activeFilters.value = filters; currentPage.value = 1 }
-const handleBuy = (product) => { cart.addItem(product); alert(`Añadiste "${product.name}" al carrito! Total: ${cart.totalItems}`) }
+const handleBuy = (product) => { cart.addItem(product) }
 </script>
 
 <style scoped>

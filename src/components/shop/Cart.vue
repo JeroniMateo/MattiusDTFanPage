@@ -36,8 +36,8 @@ import { useCartStore } from '@/stores/cart.js'
 const cart = useCartStore()
 
 const increaseQty = (item) => cart.addItem(item)
-const decreaseQty = (item) => cart.decreaseItem(item)
-const removeItem = (item) => cart.removeItem(item)
+const decreaseQty = (item) => cart.decreaseItem(item.id)
+const removeItem = (item) => cart.removeItem(item.id)
 
 const total = computed(() =>
   cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0)
@@ -53,6 +53,7 @@ const total = computed(() =>
   padding: 20px;
   border-radius: 12px;
   color: white;
+  height: fit-content;
 }
 
 .cart-title { font-size: 1.3rem; margin-bottom: 1rem; color: #ffa500; }

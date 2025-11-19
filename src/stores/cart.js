@@ -16,17 +16,17 @@ export const useCartStore = defineStore('cart', {
         this.items.push({ ...product, quantity: 1 })
       }
     },
-    decreaseItem(product) {
-      const existing = this.items.find(i => i.id === product.id)
+    decreaseItem(id) {
+      const existing = this.items.find(i => i.id === id)
       if (existing) {
         existing.quantity--
         if (existing.quantity <= 0) {
-          this.removeItem(product)
+          this.removeItem(id)
         }
       }
     },
-    removeItem(product) {
-      this.items = this.items.filter(i => i.id !== product.id)
+    removeItem(id) {
+      this.items = this.items.filter(i => i.id !== id)
     },
     clearCart() {
       this.items = []
