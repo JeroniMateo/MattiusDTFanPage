@@ -18,7 +18,7 @@
             <li><router-link to="/about" class="footer-link">Sobre mí</router-link></li>
             <li><router-link to="/plataformas" class="footer-link">Plataformas</router-link></li>
             <li><router-link to="/eventos" class="footer-link">Eventos</router-link></li>
-            <li><router-link to="/tienda" class="footer-link">Tienda</router-link></li>
+            <li><router-link to="/shop" class="footer-link">Tienda</router-link></li>
           </ul>
         </b-col>
 

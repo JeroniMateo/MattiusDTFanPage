@@ -15,7 +15,7 @@
         <b-nav-item to="/about" class="nav-link-custom">Sobre mí</b-nav-item>
         <b-nav-item to="/plataformas" class="nav-link-custom">Plataformas</b-nav-item>
         <b-nav-item to="/eventos" class="nav-link-custom">Eventos</b-nav-item>
-        <b-nav-item to="/tienda" class="nav-link-custom">Tienda</b-nav-item>
+        <b-nav-item to="/shop" class="nav-link-custom">Tienda</b-nav-item>
       </b-navbar-nav>
     </b-container>
   </b-navbar>

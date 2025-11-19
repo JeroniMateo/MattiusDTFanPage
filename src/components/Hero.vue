@@ -3,7 +3,7 @@
     <div class="hero-content">
       <h1 class="hero-title" data-aos="fade-down">Bienvenido a Mattius DT Fan Page</h1>
       <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Deportes, gameplays, aventuras y mucho más</p>
-      <router-link to="/tienda" class="btn btn-warning btn-lg mt-3" data-aos="zoom-in" data-aos-delay="400">
+      <router-link to="/shop" class="btn btn-warning btn-lg mt-3" data-aos="zoom-in" data-aos-delay="400">
         Ver Tienda
       </router-link>
     </div>
