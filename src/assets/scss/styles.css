@@ -1,0 +1,46 @@
+/* src/assets/css/variables.css */
+
+:root {
+  /* COLORES PRINCIPALES */
+  --primary-color: #ffa500;             /* naranja principal */
+  --secondary-color: #ff7700cc;             /* naranja principal */
+  --accent-orange-light: #ffb84d;       /* naranja claro para hover */
+  --dark-bg: #111;                       /* negro oscuro de fondo */
+  --secondary-dark: #181818;             /* fondo oscuro para cards */
+  --border-dark: #2b2b2b;                /* borde cards */
+  --text-light: #ffffff;                 /* texto blanco */
+  --text-dark: #ffffff;                 /* texto blanco */
+  --text-muted: #aaaaaa; 
+  --text-color: #ff5900;               /* texto gris */
+  
+  /* BOTONES */
+  --btn-bg: var(--primary-color);
+  --btn-hover: var(--accent-orange-light);
+  --btn-text: #ffffff;
+  
+  /* NAVBAR */
+  --navbar-bg: #111;
+  --navbar-text: var(--primary-color);
+  --navbar-link-hover: var(--accent-orange-light);
+  
+  /* FOOTER */
+  --footer-bg: #111;
+  --footer-link: var(--primary-color);
+  --footer-link-hover: var(--accent-orange-light);
+  
+  /* SOMBRAS Y TRANSICIONES */
+  --shadow-light: rgba(0,0,0,0.2);
+  --shadow-heavy: rgba(0,0,0,0.45);
+  --transition-fast: 0.2s ease-in-out;
+  --transition-medium: 0.25s ease;
+  
+  /* SPACING Y BORDER RADIUS */
+  --border-radius: 12px;
+  --card-padding: 20px;
+
+  /* TIPOGRAFÍA */
+  --font-family-main: 'Roboto', sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+}

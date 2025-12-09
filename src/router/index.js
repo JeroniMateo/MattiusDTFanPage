@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import About from "../views/About.vue";
 import Events from "../views/Events.vue";
 import Shop from "../views/Shop.vue";
+import Platforms from "../views/Platforms.vue";
 
 const routes = [
   { path: "/", name: "Home", component: Home },
@@ -13,6 +14,7 @@ const routes = [
   },
   { path: "/eventos", name: "Events", component: Events },
   { path: "/shop", name: "Shop", component: Shop },
+  { path: "/platforms", name: "Platforms", component: Platforms },
 ];
 
 const router = createRouter({
