@@ -11,8 +11,31 @@
   --text-light: #ffffff;                 /* texto blanco */
   --text-dark: #ffffff;                 /* texto blanco */
   --text-muted: #aaaaaa; 
-  --text-color: #ff5900;               /* texto gris */
+  --text-color: #ff1900;               /* texto gris */
   
+/* Bootstrap button colors */
+  --btn-primary: #0d6efd;
+  --btn-secondary: #6c757d;
+  --btn-success: #198754;
+  --btn-danger: #dc3545;
+  --btn-warning: #ffc107;
+  --btn-info: #0dcaf0;
+  --btn-light: #f8f9fa;
+  --btn-dark: #212529;
+  --btn-link: transparent;
+
+  /* Optional text colors for light/dark contrast */
+  --btn-primary-text: #fff;
+  --btn-secondary-text: #fff;
+  --btn-success-text: #fff;
+  --btn-danger-text: #fff;
+  --btn-warning-text: #212529;
+  --btn-info-text: #212529;
+  --btn-light-text: #212529;
+  --btn-dark-text: #fff;
+  --btn-link-text: #0d6efd;
+
+
   /* BOTONES */
   --btn-bg: var(--primary-color);
   --btn-hover: var(--accent-orange-light);

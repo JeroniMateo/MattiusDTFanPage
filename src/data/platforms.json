@@ -1,0 +1,9 @@
+[
+  { "name": "YouTube", "icon": "youtube", "desc": "Gameplays y deportes", "link": "https://www.youtube.com/@thewildhouse4609" },
+  { "name": "Twitch", "icon": "twitch", "desc": "Streaming en vivo", "link": "https://www.twitch.tv/mattius_dt" },
+  { "name": "Kick", "icon": "tiktok", "desc": "Streams alternativos", "link": "https://kick.com/mattius-dt" },
+  { "name": "TikTok", "icon": "tiktok", "desc": "Momentos cortos", "link": "https://www.tiktok.com/@mattius_dt" },
+  { "name": "Instagram", "icon": "instagram", "desc": "Fotos y contenido", "link": "https://www.instagram.com/mattius_dt/" },
+  { "name": "X", "icon": "twitter", "desc": "Tweets y noticias", "link": "https://x.com/MattiusDT2" },
+  { "name": "Discord", "icon": "discord", "desc": "Comunidad y chat", "link": "https://discord.com/invite/56HWrAP9AT" }
+]

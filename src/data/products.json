@@ -1,0 +1,10 @@
+[
+  { "id": 1, "name": "Camiseta Mattius DT", "price": 25, "category": "Camisetas", "image": "CamisetaNegraCentral.webp" },
+  { "id": 2, "name": "Sudadera Mattius DT", "price": 45, "category": "Sudaderas", "image": "SudaderaAzul.webp" },
+  { "id": 3, "name": "Taza Oficial", "price": 15, "category": "Accesorios", "image": "Taza.webp" },
+  { "id": 4, "name": "Sudadera Joven", "price": 20, "category": "Accesorios", "image": "SudaderaGrisJuvenil.webp" },
+  { "id": 5, "name": "Edición Limitada Botella", "price": 35, "category": "Ediciones Limitadas", "image": "Botella.webp" },
+  { "id": 6, "name": "Sudadera Negra", "price": 50, "category": "Sudaderas", "image": "SudaderaNegra.webp" },
+  { "id": 7, "name": "Pegatinas Coleccionista", "price": 18, "category": "Accesorios", "image": "Pegatinas.webp" },
+  { "id": 8, "name": "Bolsa Oficial", "price": 22, "category": "Accesorios", "image": "Bolsa.webp" }
+]

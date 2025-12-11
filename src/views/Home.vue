@@ -15,9 +15,7 @@
             data-aos="fade-up"
           >
             <b-card :title="platform.name" class="text-center h-100 hover-card">
-              <!-- Icono Font Awesome -->
               <font-awesome-icon :icon="platform.icon" size="3x" class="mb-3" />
-
               <p>{{ platform.desc }}</p>
               <a
                 :href="platform.link"
@@ -44,12 +42,7 @@
             data-aos="fade-up"
           >
             <b-card :title="event.title" class="h-100 hover-card">
-              <img
-                :src="event.img"
-                :alt="event.title"
-                class="mb-3"
-                style="height: 150px; object-fit: cover"
-              />
+              <font-awesome-icon :icon="event.icon" size="3x" class="mb-3" />
               <p>{{ event.desc }}</p>
               <small class="text-muted">{{ event.date }}</small>
             </b-card>
@@ -65,7 +58,7 @@
         <b-row class="g-4">
           <b-col
             md="3"
-            v-for="product in products"
+            v-for="product in featuredProducts"
             :key="product.name"
             data-aos="fade-up"
           >
@@ -88,103 +81,56 @@
 
 <script setup>
 import Hero from "@/components/Hero.vue";
-import {
-  faYoutube,
-  faTwitch,
-  faTiktok,
-  faTwitter,
-  faInstagram,
-  faDiscord,
+
+// JSON data
+import rawProducts from "@/data/products.json";
+import rawEvents from "@/data/events.json";
+import platformsData from "@/data/platforms.json";
+
+// Font Awesome icons
+import { 
+  faYoutube, faTwitch, faTiktok, faTwitter, faInstagram, faDiscord 
 } from "@fortawesome/free-brands-svg-icons";
 
-const platforms = [
-  {
-    name: "YouTube",
-    icon: faYoutube,
-    desc: "Gameplays y deportes",
-    link: "https://www.youtube.com/@thewildhouse4609",
-  },
-  {
-    name: "Twitch",
-    icon: faTwitch,
-    desc: "Streaming en vivo",
-    link: "https://www.twitch.tv/mattius_dt",
-  },
-  {
-    name: "Kick",
-    icon: faTiktok,
-    desc: "Streams alternativos",
-    link: "https://kick.com/mattius-dt",
-  },
-  {
-    name: "TikTok",
-    icon: faTiktok,
-    desc: "Momentos cortos",
-    link: "https://www.tiktok.com/@mattius_dt",
-  },
-  {
-    name: "Instagram",
-    icon: faInstagram,
-    desc: "Fotos y contenido",
-    link: "https://www.instagram.com/mattius_dt/",
-  },
-  {
-    name: "X",
-    icon: faTwitter,
-    desc: "Tweets y noticias",
-    link: "https://x.com/MattiusDT2",
-  },
-  {
-    name: "Discord",
-    icon: faDiscord,
-    desc: "Comunidad y chat",
-    link: "https://discord.com/invite/56HWrAP9AT",
-  },
-];
+// -----------------------------
+// Products
+// -----------------------------
+const products = rawProducts.map(p => ({
+  ...p,
+  img: new URL(`../assets/img/${p.img}`, import.meta.url).href
+}));
+const featuredProducts = products.slice(0, 4); // show first 4
 
-const events = [
-  {
-    title: "Directo especial",
-    img: "@/assets/img/event1.webp",
-    desc: "Gameplays épicos en directo",
-    date: "12 Nov 2025",
-  },
-  {
-    title: "Torneo online",
-    img: "@/assets/img/event2.webp",
-    desc: "Competición con premios",
-    date: "20 Nov 2025",
-  },
-  {
-    title: "Q&A con fans",
-    img: "@/assets/img/event3.webp",
-    desc: "Preguntas y respuestas",
-    date: "25 Nov 2025",
-  },
-];
+// -----------------------------
+// Platforms
+// -----------------------------
+const platformIconMap = {
+  youtube: faYoutube,
+  twitch: faTwitch,
+  tiktok: faTiktok,
+  twitter: faTwitter,
+  instagram: faInstagram,
+  discord: faDiscord,
+};
 
-const products = [
-  {
-    name: "Camiseta oficial",
-    img: "@/assets/img/product1.webp",
-    desc: "Camiseta de calidad premium",
-  },
-  {
-    name: "Gorra Mattius DT",
-    img: "@/assets/img/product2.webp",
-    desc: "Gorra ajustable y cómoda",
-  },
-  {
-    name: "Taza Gamer",
-    img: "@/assets/img/product3.webp",
-    desc: "Para café o té mientras juegas",
-  },
-  {
-    name: "Sudadera Hoodie",
-    img: "@/assets/img/product4.webp",
-    desc: "Hoodie oficial Mattius DT",
-  },
-];
+const platforms = platformsData.map(p => ({
+  ...p,
+  icon: platformIconMap[p.icon.toLowerCase()] || faYoutube
+}));
+
+// -----------------------------
+// Events
+// -----------------------------
+const eventIconMap = {
+  twitch: faTwitch,
+  tiktok: faTiktok,
+  discord: faDiscord
+};
+
+const events = rawEvents.map(e => ({
+  ...e,
+  icon: eventIconMap[e.icon.toLowerCase()] || faTwitch
+}));
 </script>
 
 <style scoped>
@@ -209,13 +155,5 @@ h2 {
 /* Secciones */
 section {
   scroll-margin-top: 70px; /* si navbar fijo */
-}
-h2 {
-  color: var(--text-color);
-}
-.hover-card {
-  background-color: var(--border-dark);
-  border: 1px solid var(--card-border);
-  color: var(--secondary-color);
 }
 </style>

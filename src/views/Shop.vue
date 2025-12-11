@@ -1,12 +1,12 @@
 <template>
   <section class="shop-view container py-5 d-flex">
 
-    <!-- Barra lateral de filtros -->
+    <!-- Sidebar Filters -->
     <aside class="me-4 mb-4" style="width: 250px;">
       <ShopFilters @filter-change="handleFilter" />
     </aside>
 
-    <!-- Lista de productos -->
+    <!-- Products List -->
     <div class="flex-grow-1 me-4">
       <SearchBar @search="handleSearch" />
       <ProductList
@@ -20,84 +20,105 @@
       />
     </div>
 
-    <!-- Carrito flotante -->
+    <!-- Floating Cart -->
     <Cart />
   </section>
 </template>
 
 <script setup>
+import { ref, computed } from 'vue'
+import { useCartStore } from '@/stores/cart.js'
+
 import SearchBar from '@/components/shop/SearchBar.vue'
 import ShopFilters from '@/components/shop/ShopFilters.vue'
 import ProductList from '@/components/shop/ProductList.vue'
 import Pagination from '@/components/shop/Pagination.vue'
 import Cart from '@/components/shop/Cart.vue'
 
-import { ref, computed } from 'vue'
-import { useCartStore } from '@/stores/cart.js'
+import rawProducts from '@/data/products.json'
+
+// Cart store
 const cart = useCartStore()
 
-// Datos de ejemplo
-const products = ref([
-  { id: 1, name: 'Camiseta Mattius DT', price: 25, category: 'Camisetas', image: new URL('@/assets/img/CamisetaNegraCentral.webp', import.meta.url).href },
-  { id: 2, name: 'Sudadera Mattius DT', price: 45, category: 'Sudaderas', image: new URL('@/assets/img/SudaderaAzul.webp', import.meta.url).href },
-  { id: 3, name: 'Taza Oficial', price: 15, category: 'Accesorios', image: new URL('@/assets/img/Taza.webp', import.meta.url).href },
-  { id: 4, name: 'Sudadera Joven', price: 20, category: 'Accesorios', image: new URL('@/assets/img/SudaderaGrisJuvenil.webp', import.meta.url).href },
-  { id: 5, name: 'Edición Limitada Botella', price: 35, category: 'Ediciones Limitadas', image: new URL('@/assets/img/Botella.webp', import.meta.url).href },
-  { id: 6, name: 'Sudadera Negra', price: 50, category: 'Sudaderas', image: new URL('@/assets/img/SudaderaNegra.webp', import.meta.url).href },
-  { id: 7, name: 'Pegatinas Coleccionista', price: 18, category: 'Accesorios', image: new URL('@/assets/img/Pegatinas.webp', import.meta.url).href },
-  { id: 8, name: 'Bolsa Oficial', price: 22, category: 'Accesorios', image: new URL('@/assets/img/Bolsa.webp', import.meta.url).href },
-])
+// Map JSON products to proper image URLs
+const products = rawProducts.map(p => ({
+  ...p,
+  image: new URL(`../assets/img/${p.image}`, import.meta.url).href
+}))
 
-
-// Filtros y búsqueda
+// Search & Filters
 const searchQuery = ref('')
 const activeFilters = ref({})
 
-// Paginación
+// Pagination
 const currentPage = ref(1)
 const perPage = 6
 
+// Filtered products
 const filteredProducts = computed(() => {
-  let result = products.value
+  let result = products
 
-  if (searchQuery.value)
-    result = result.filter(p => p.name.toLowerCase().includes(searchQuery.value.toLowerCase()))
+  // Search
+  if (searchQuery.value) {
+    result = result.filter(p =>
+      p.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    )
+  }
 
-  if (activeFilters.value.category)
+  // Category filter
+  if (activeFilters.value.category) {
     result = result.filter(p => p.category === activeFilters.value.category)
+  }
 
-  if (activeFilters.value.minPrice)
+  // Price filters
+  if (activeFilters.value.minPrice) {
     result = result.filter(p => p.price >= parseFloat(activeFilters.value.minPrice))
-
-  if (activeFilters.value.maxPrice)
+  }
+  if (activeFilters.value.maxPrice) {
     result = result.filter(p => p.price <= parseFloat(activeFilters.value.maxPrice))
+  }
 
+  // Sorting
   if (activeFilters.value.sortBy) {
     switch(activeFilters.value.sortBy) {
-      case 'price-asc': result = result.sort((a,b)=> a.price-b.price); break
-      case 'price-desc': result = result.sort((a,b)=> b.price-a.price); break
-      case 'name-asc': result = result.sort((a,b)=> a.name.localeCompare(b.name)); break
-      case 'name-desc': result = result.sort((a,b)=> b.name.localeCompare(a.name)); break
+      case 'price-asc': result = result.sort((a,b) => a.price - b.price); break
+      case 'price-desc': result = result.sort((a,b) => b.price - a.price); break
+      case 'name-asc': result = result.sort((a,b) => a.name.localeCompare(b.name)); break
+      case 'name-desc': result = result.sort((a,b) => b.name.localeCompare(a.name)); break
     }
   }
 
   return result
 })
 
+// Paginated products
 const paginatedProducts = computed(() => {
   const start = (currentPage.value - 1) * perPage
   const end = start + perPage
   return filteredProducts.value.slice(start, end)
 })
 
-// Eventos
-const handleSearch = (query) => { searchQuery.value = query; currentPage.value = 1 }
-const handleFilter = (filters) => { activeFilters.value = filters; currentPage.value = 1 }
-const handleBuy = (product) => { cart.addItem(product) }
+// Event handlers
+const handleSearch = query => { 
+  searchQuery.value = query
+  currentPage.value = 1
+}
+const handleFilter = filters => {
+  activeFilters.value = filters
+  currentPage.value = 1
+}
+const handleBuy = product => {
+  cart.addItem(product)
+}
 </script>
 
 <style scoped>
-.shop-title { font-size: 2.5rem; color: #ffa500; }
-.shop-view aside { background: #111; padding: 20px; border-radius: 12px; color: white; min-height: 300px; }
+.shop-view aside {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  min-height: 300px;
+}
 .shop-view { min-height: 80vh; }
 </style>

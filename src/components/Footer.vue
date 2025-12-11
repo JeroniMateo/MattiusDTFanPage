@@ -26,7 +26,7 @@
         <b-col md="4">
           <h6 class="fw-bold mb-3">Sígueme</h6>
           <div class="d-flex justify-content-center justify-content-md-start gap-3 social-icons">
-            <a href="https://www.youtube.com/@mmattiusdt" target="_blank" class="social-link youtube">
+            <a href="https://www.youtube.com/@thewildhouse4609" target="_blank" class="social-link youtube">
               <font-awesome-icon :icon="['fab','youtube']" size="2x"/>
             </a>
             <a href="https://www.twitch.tv/mattius_dt" target="_blank" class="social-link twitch">
