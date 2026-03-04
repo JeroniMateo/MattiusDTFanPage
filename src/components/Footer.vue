@@ -1,101 +1,134 @@
 <template>
-  <b-footer class="bg-dark text-light pt-5">
+  <footer class="custom-footer pt-5 pb-4">
     <b-container>
       <b-row class="text-center text-md-start align-items-start">
 
-        <!-- Logo e info -->
         <b-col md="4" class="mb-4 mb-md-0">
-          <img :src="logo" alt="Logo Mattius DT" class="mb-3" style="height: 70px;">
-          <h5 class="fw-bold">Mattius DT Fan Shop</h5>
-          <p class="text-muted small">Deportes, Gameplays, Aventuras y más</p>
+          <div class="footer-brand mb-3">
+            <img :src="logo" alt="Logo Mattius DT" class="footer-logo mb-2">
+            <h5 class="fw-bold brand-name">MATTIUS <span class="text-white">DT</span></h5>
+          </div>
+          <p class="text-muted small pe-md-4">
+            Acompañame en mis aventuras diarias. Deportes, Gameplays y la mejor comunidad del mundo. ¡Suscríbete y no te pierdas nada!
+          </p>
         </b-col>
 
-        <!-- Navegación -->
         <b-col md="4" class="mb-4 mb-md-0">
-          <h6 class="fw-bold mb-3">Navegación</h6>
+          <h6 class="text-white fw-bold mb-3 text-uppercase small letter-spacing">Navegación</h6>
           <ul class="list-unstyled footer-nav">
             <li><router-link to="/" class="footer-link">Inicio</router-link></li>
             <li><router-link to="/about" class="footer-link">Sobre mí</router-link></li>
-            <li><router-link to="/plataformas" class="footer-link">Plataformas</router-link></li>
-            <li><router-link to="/eventos" class="footer-link">Eventos</router-link></li>
-            <li><router-link to="/shop" class="footer-link">Tienda</router-link></li>
+            <li><router-link to="/platforms" class="footer-link">Plataformas</router-link></li>
+            <li><router-link to="/events" class="footer-link">Eventos</router-link></li>
+            <li><router-link to="/shop" class="footer-link">Tienda Oficial</router-link></li>
           </ul>
         </b-col>
 
-        <!-- Redes sociales -->
         <b-col md="4">
-          <h6 class="fw-bold mb-3">Sígueme</h6>
+          <h6 class="text-white fw-bold mb-3 text-uppercase small letter-spacing">Comunidad</h6>
           <div class="d-flex justify-content-center justify-content-md-start gap-3 social-icons">
-            <a href="https://www.youtube.com/@thewildhouse63" target="_blank" class="social-link youtube">
-              <font-awesome-icon :icon="['fab','youtube']" size="2x"/>
+            <a href="https://www.youtube.com/@thewildhouse63" target="_blank" class="social-link youtube" title="YouTube">
+              <font-awesome-icon :icon="['fab','youtube']" />
             </a>
-            <a href="https://www.twitch.tv/mattius_dt" target="_blank" class="social-link twitch">
-              <font-awesome-icon :icon="['fab','twitch']" size="2x"/>
+            <a href="https://www.twitch.tv/mattius_dt" target="_blank" class="social-link twitch" title="Twitch">
+              <font-awesome-icon :icon="['fab','twitch']" />
             </a>
-            <a href="https://www.tiktok.com/@mattius_dt" target="_blank" class="social-link tiktok">
-              <font-awesome-icon :icon="['fab','tiktok']" size="2x"/>
+            <a href="https://www.tiktok.com/@mattius_dt" target="_blank" class="social-link tiktok" title="TikTok">
+              <font-awesome-icon :icon="['fab','tiktok']" />
             </a>
-            <a href="https://x.com/MattiusDT2" target="_blank" class="social-link twitter">
-              <font-awesome-icon :icon="['fab','twitter']" size="2x"/>
+            <a href="https://x.com/MattiusDT2" target="_blank" class="social-link twitter" title="Twitter/X">
+              <font-awesome-icon :icon="['fab','twitter']" />
             </a>
-            <a href="https://www.instagram.com/mattius_dt/" target="_blank" class="social-link instagram">
-              <font-awesome-icon :icon="['fab','instagram']" size="2x"/>
+            <a href="https://www.instagram.com/mattius_dt/" target="_blank" class="social-link instagram" title="Instagram">
+              <font-awesome-icon :icon="['fab','instagram']" />
             </a>
-            <a href="https://discord.com/invite/56HWrAP9AT" target="_blank" class="social-link discord">
-              <font-awesome-icon :icon="['fab','discord']" size="2x"/>
+            <a href="https://discord.com/invite/56HWrAP9AT" target="_blank" class="social-link discord" title="Discord">
+              <font-awesome-icon :icon="['fab','discord']" />
             </a>
+          </div>
+          <div class="mt-4">
+             <b-badge variant="outline-warning" class="p-2 px-3">#TeamMattiuz</b-badge>
           </div>
         </b-col>
 
       </b-row>
 
-      <hr class="border-secondary my-4">
+      <hr class="footer-divider my-4">
 
-      <div class="text-center text-muted small">
-        &copy; 2025 Mattius DT. Todos los derechos reservados.
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center text-muted small">
+        <p class="mb-2 mb-md-0">&copy; 2026 Mattius DT. Desarrollado con pasión para la comunidad.</p>
+        <div class="footer-legal">
+          <a href="#" class="text-muted text-decoration-none me-3">Privacidad</a>
+          <a href="#" class="text-muted text-decoration-none">Términos</a>
+        </div>
       </div>
     </b-container>
-  </b-footer>
+  </footer>
 </template>
 
 <script setup>
 import logo from '@/assets/img/logo.webp'
-
-// Font Awesome
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 </script>
 
 <style scoped>
-.footer-link {
+.custom-footer {
+  background-color: #0a0a0a; /* Negro profundo para el pie de página */
+  border-top: 2px solid #b00202; /* Línea roja distintiva */
+}
+
+.footer-logo {
+  height: 60px;
+  filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.2));
+}
+
+.brand-name {
   color: #ffa500;
+  letter-spacing: 2px;
+}
+
+.letter-spacing {
+  letter-spacing: 1.5px;
+}
+
+.footer-link {
+  color: #888;
   text-decoration: none;
-  display: block;
-  margin: 5px 0;
-  transition: color 0.3s;
+  display: inline-block;
+  padding: 4px 0;
+  transition: all 0.3s ease;
 }
 
 .footer-link:hover {
-  color: #fff;
+  color: #ffa500;
+  transform: translateX(5px);
 }
 
-.social-link {
-  transition: transform 0.3s, color 0.3s;
+/* Social Icons Glow Effect */
+.social-icons a {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #1a1a1a;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.social-link:hover {
-  transform: scale(1.2);
-  color: #ffa500 !important;
+.social-icons a:hover {
+  transform: translateY(-5px);
+  color: #fff !important;
 }
 
-/* Colores por red */
-.social-link.youtube { color: #FF0000; }
-.social-link.twitch { color: #9146FF; }
-.social-link.tiktok { color: #000; }
-.social-link.twitter { color: #1DA1F2; }
-.social-link.instagram { color: #FCAF45; }
-.social-link.discord { color: #7289DA; }
+.social-link.youtube:hover { background: #FF0000; box-shadow: 0 0 15px #FF0000; }
+.social-link.twitch:hover { background: #9146FF; box-shadow: 0 0 15px #9146FF; }
+.social-link.tiktok:hover { background: #000; box-shadow: 0 0 15px #ffffff44; }
+.social-link.twitter:hover { background: #1DA1F2; box-shadow: 0 0 15px #1DA1F2; }
+.social-link.instagram:hover { background: #E4405F; box-shadow: 0 0 15px #E4405F; }
+.social-link.discord:hover { background: #5865f2; box-shadow: 0 0 15px #5865f2; }
 
-.footer-nav li {
-  margin-bottom: 0.5rem;
+.footer-divider {
+  border-color: rgba(255, 255, 255, 0.05);
 }
 </style>

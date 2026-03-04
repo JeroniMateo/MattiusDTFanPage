@@ -1,170 +1,136 @@
 <template>
-  <div class="platforms-page">
-    <!-- Header -->
-    <section
-      class="platforms-header d-flex align-items-center justify-content-center text-center"
-    >
-      <div>
-        <h1 data-aos="fade-down">Mis Plataformas</h1>
-        <h2 data-aos="fade-up" data-aos-delay="200">
-          Sígueme y descubre mi contenido en todas mis redes
-        </h2>
+  <div class="platforms-page bg-dark-page min-vh-100 py-5">
+    <b-container>
+      <div class="text-center mb-5" data-aos="fade-down">
+        <h1 class="display-4 fw-bold text-white">MIS <span class="text-warning">PLATAFORMAS</span></h1>
+        <p class="text-muted mx-auto" style="max-width: 600px;">
+          Conéctate conmigo en todas mis redes sociales para no perderte ningún contenido, sorteo o directo.
+        </p>
       </div>
-    </section>
 
-    <!-- Cards de plataformas -->
-    <section class="py-5">
-      <b-container>
-        <b-row class="g-4 justify-content-center">
-          <b-col
-            md="3"
-            v-for="platform in platforms"
-            :key="platform.name"
-            data-aos="fade-up"
-          >
-            <b-card class="text-center h-100 hover-card" id="targetCard">
-              <font-awesome-icon :icon="platform.icon" size="3x" class="mb-3" />
-              <h5>{{ platform.name }}</h5>
-              <p>{{ platform.desc }}</p>
-              <a
-                :href="platform.link"
-                target="_blank"
-                class="btn btn-warning w-100"
-                >Visitar</a
-              >
-            </b-card>
-          </b-col>
-        </b-row>
-      </b-container>
-    </section>
+      <b-row class="justify-content-center">
+        <b-col 
+          v-for="(platform, index) in platforms" 
+          :key="platform.name" 
+          cols="12" sm="6" lg="4" xl="3" 
+          class="mb-4"
+        >
+          <a :href="platform.link" target="_blank" class="text-decoration-none">
+            <div 
+              class="platform-card h-100 p-4 text-center" 
+              :class="platform.icon"
+              data-aos="zoom-in" 
+              :data-aos-delay="index * 50"
+            >
+              <div class="icon-circle mb-3 mx-auto">
+                <font-awesome-icon :icon="['fab', platform.icon]" size="2x" />
+              </div>
+              <h4 class="text-white fw-bold mb-2">{{ platform.name }}</h4>
+              <p class="text-muted small mb-0">{{ platform.desc }}</p>
+              
+              <div class="go-link mt-3">
+                <span>Visitar Canal</span>
+                <font-awesome-icon icon="external-link-alt" class="ms-2 small" />
+              </div>
+            </div>
+          </a>
+        </b-col>
+      </b-row>
+
+      <div class="community-banner mt-5 p-5 text-center rounded shadow-lg" data-aos="fade-up">
+        <h2 class="fw-bold text-white">¿Aún no estás en Discord?</h2>
+        <p class="text-light opacity-75">Únete a más de 500 personas en nuestro servidor oficial.</p>
+        <b-button href="https://discord.com/invite/56HWrAP9AT" target="_blank" variant="primary" class="btn-discord px-5 py-2 fw-bold">
+          ENTRAR AL SERVIDOR
+        </b-button>
+      </div>
+    </b-container>
   </div>
 </template>
 
 <script setup>
-import {
-  faYoutube,
-  faTwitch,
-  faTiktok,
-  faTwitter,
-  faInstagram,
-  faDiscord,
-} from "@fortawesome/free-brands-svg-icons";
-
-const platforms = [
-  {
-    name: "YouTube",
-    icon: faYoutube,
-    desc: "Gameplays y deportes",
-    link: "https://www.youtube.com/@thewildhouse63",
-  },
-  {
-    name: "Twitch",
-    icon: faTwitch,
-    desc: "Streaming en vivo",
-    link: "https://www.twitch.tv/mattius_dt",
-  },
-  {
-    name: "Kick",
-    icon: faTiktok,
-    desc: "Streams alternativos",
-    link: "https://kick.com/mattius-dt",
-  },
-  {
-    name: "TikTok",
-    icon: faTiktok,
-    desc: "Momentos cortos",
-    link: "https://www.tiktok.com/@mattius_dt",
-  },
-  {
-    name: "Instagram",
-    icon: faInstagram,
-    desc: "Fotos y contenido",
-    link: "https://www.instagram.com/mattius_dt/",
-  },
-  {
-    name: "X / Twitter",
-    icon: faTwitter,
-    desc: "Tweets y noticias",
-    link: "https://x.com/MattiusDT2",
-  },
-  {
-    name: "Discord",
-    icon: faDiscord,
-    desc: "Comunidad y chat",
-    link: "https://discord.com/invite/56HWrAP9AT",
-  },
-];
+import platforms from '@/data/platforms.json';
 </script>
 
 <style scoped>
-/* ===== HEADER ===== */
-.platforms-header {
-  height: 32vh;
-  background-size: cover;
-  background-position: center;
-  color: #fff;
+.bg-dark-page { background-color: #0a0a0a; }
+
+.platform-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-circle {
+  width: 70px;
+  height: 70px;
+  background: #1a1a1a;
+  border-radius: 50%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  transition: all 0.4s;
+  color: #fff;
 }
 
-.platforms-header h1 {
-  font-size: 3rem;
+.go-link {
+  font-size: 0.8rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  color: #ffa500;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
 }
 
-.platforms-header p {
-  font-size: 1.2rem;
+/* Hover Effects */
+.platform-card:hover {
+  transform: translateY(-10px);
+  background: #1e1e1e;
 }
 
-/* ===== CARD STYLE ===== */
-.platform-logo {
-  height: 80px;
-  user-select: none;
+.platform-card:hover .go-link {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.hover-card {
-  background: #181818;
-  border: 1px solid #2b2b2b;
-  color: white;
-  border-radius: 14px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.3s;
-  padding: 20px;
-  cursor: pointer;
+/* Colores dinámicos al hacer hover */
+.youtube:hover { border-color: #FF0000; box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2); }
+.youtube:hover .icon-circle { background: #FF0000; }
+
+.twitch:hover { border-color: #9146FF; box-shadow: 0 10px 30px rgba(145, 70, 255, 0.2); }
+.twitch:hover .icon-circle { background: #9146FF; }
+
+.twitter:hover { border-color: #1DA1F2; box-shadow: 0 10px 30px rgba(29, 161, 242, 0.2); }
+.twitter:hover .icon-circle { background: #1DA1F2; }
+
+.instagram:hover { border-color: #E4405F; box-shadow: 0 10px 30px rgba(228, 64, 95, 0.2); }
+.instagram:hover .icon-circle { background: #E4405F; }
+
+.tiktok:hover { border-color: #00f2ea; box-shadow: 0 10px 30px rgba(0, 242, 234, 0.1); }
+.tiktok:hover .icon-circle { background: #000; color: #ff0050; text-shadow: 2px 0 #00f2ea; }
+
+.discord:hover { border-color: #5865F2; box-shadow: 0 10px 30px rgba(88, 101, 242, 0.2); }
+.discord:hover .icon-circle { background: #5865F2; }
+
+/* Banner Especial */
+.community-banner {
+  background: linear-gradient(135deg, #5865F2 0%, #2c2f33 100%);
+  border: none;
 }
 
-.hover-card h5 {
-  color: var(--primary-color);
-  font-weight: 600;
+.btn-discord {
+  background-color: #fff;
+  color: #5865F2;
+  border: none;
+  transition: transform 0.2s;
 }
-
-.hover-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.45);
-  border-color: var(--primary-color);
-}
-
-/* ===== BUTTON ===== */
-.btn-warning {
-  background-color: var(--primary-color) !important;
-  border: none !important;
-  color: white !important;
-  font-weight: 600;
-  transition: 0.2s;
-}
-
-.btn-warning:hover {
-  background-color: var(--accent-orange-light) !important;
-}
-h1 {
-  color: red;
-}
-h2 {
-  color: orange;
-}
-.targetCard {
-  color: orange;
+.btn-discord:hover {
+  transform: scale(1.1);
+  background-color: #f0f0f0;
+  color: #5865F2;
 }
 </style>

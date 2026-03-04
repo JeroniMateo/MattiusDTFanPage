@@ -1,69 +1,62 @@
 /* src/assets/css/variables.css */
 
 :root {
-  /* COLORES PRINCIPALES */
-  --primary-color: #ffa500;             /* naranja principal */
-  --secondary-color: #ff7700cc;             /* naranja principal */
-  --accent-orange-light: #ffb84d;       /* naranja claro para hover */
-  --dark-bg: #111;                       /* negro oscuro de fondo */
-  --secondary-dark: #181818;             /* fondo oscuro para cards */
-  --border-dark: #2b2b2b;                /* borde cards */
-  --text-light: #ffffff;                 /* texto blanco */
-  --text-dark: #ffffff;                 /* texto blanco */
-  --text-muted: #aaaaaa; 
-  --text-color: #ff1900;               /* texto gris */
+  /* PALETA DE IDENTIDAD - MATTIUS DT */
+  --primary-color: #ffa500;             /* Naranja interacción */
+  --primary-glow: rgba(255, 165, 0, 0.4);
+  --accent-red: #ff1900;                /* Rojo energía (tu marca) */
+  --accent-red-glow: rgba(255, 25, 0, 0.5);
+  --accent-orange-light: #ffb84d;       /* Hover */
   
-/* Bootstrap button colors */
-  --btn-primary: #0d6efd;
-  --btn-secondary: #6c757d;
-  --btn-success: #198754;
-  --btn-danger: #dc3545;
-  --btn-warning: #ffc107;
-  --btn-info: #0dcaf0;
-  --btn-light: #f8f9fa;
-  --btn-dark: #212529;
-  --btn-link: transparent;
-
-  /* Optional text colors for light/dark contrast */
-  --btn-primary-text: #fff;
-  --btn-secondary-text: #fff;
-  --btn-success-text: #fff;
-  --btn-danger-text: #fff;
-  --btn-warning-text: #212529;
-  --btn-info-text: #212529;
-  --btn-light-text: #212529;
-  --btn-dark-text: #fff;
-  --btn-link-text: #0d6efd;
-
-
-  /* BOTONES */
-  --btn-bg: var(--primary-color);
-  --btn-hover: var(--accent-orange-light);
-  --btn-text: #ffffff;
+  /* FONDO Y SUPERFICIES (Dark Theme) */
+  --dark-bg: #0a0a0a;                   /* Negro profundo para el fondo */
+  --secondary-dark: #141414;             /* Gris casi negro para cards */
+  --surface-light: #1e1e1e;              /* Para inputs o elementos elevados */
+  --border-dark: #2b2b2b;                /* Borde sutil */
   
-  /* NAVBAR */
-  --navbar-bg: #111;
-  --navbar-text: var(--primary-color);
-  --navbar-link-hover: var(--accent-orange-light);
-  
-  /* FOOTER */
-  --footer-bg: #111;
-  --footer-link: var(--primary-color);
-  --footer-link-hover: var(--accent-orange-light);
-  
-  /* SOMBRAS Y TRANSICIONES */
-  --shadow-light: rgba(0,0,0,0.2);
-  --shadow-heavy: rgba(0,0,0,0.45);
-  --transition-fast: 0.2s ease-in-out;
-  --transition-medium: 0.25s ease;
-  
-  /* SPACING Y BORDER RADIUS */
-  --border-radius: 12px;
-  --card-padding: 20px;
-
   /* TIPOGRAFÍA */
-  --font-family-main: 'Roboto', sans-serif;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 600;
+  --text-white: #ffffff;
+  --text-muted: #aaaaaa;
+  --text-gray: #777777;
+  
+  /* COMPONENTES DE BOOTSTRAP (Override) */
+  --btn-warning: var(--primary-color);
+  --btn-danger: var(--accent-red);
+  
+  /* NAVBAR & FOOTER */
+  --navbar-bg: rgba(10, 10, 10, 0.95);
+  --navbar-height: 80px;
+  
+  /* ANIMACIONES */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  
+  /* BORDES */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 20px;
+}
+
+/* APLICACIÓN GLOBAL BÁSICA */
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-white);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* SCROLLBAR PERSONALIZADA (Estilo Gaming) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-red);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
 }

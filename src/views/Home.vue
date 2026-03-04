@@ -1,76 +1,82 @@
 <template>
-  <div>
-    <!-- Hero -->
+  <div class="home-page">
     <Hero />
 
-    <!-- Plataformas -->
-    <section class="py-5 bg-light">
+    <section class="py-5 bg-dark-section">
       <b-container>
-        <h2 class="text-center mb-4">Mis Plataformas</h2>
+        <h2 class="text-center section-title" data-aos="fade-down">Mis Plataformas</h2>
         <b-row class="g-4 justify-content-center">
           <b-col
             md="3"
+            sm="6"
             v-for="platform in platforms"
             :key="platform.name"
-            data-aos="fade-up"
+            data-aos="zoom-in"
           >
-            <b-card :title="platform.name" class="text-center h-100 hover-card">
-              <font-awesome-icon :icon="platform.icon" size="3x" class="mb-3" />
-              <p>{{ platform.desc }}</p>
-              <a
-                :href="platform.link"
-                target="_blank"
-                class="btn btn-warning w-100"
-              >
-                Visitar
-              </a>
-            </b-card>
+            <a :href="platform.link" target="_blank" class="text-decoration-none">
+              <b-card class="text-center h-100 platform-card border-0">
+                <font-awesome-icon 
+                  :icon="platform.icon" 
+                  size="3x" 
+                  :class="['mb-3', 'icon-' + platform.name.toLowerCase()]" 
+                />
+                <h4 class="platform-name">{{ platform.name }}</h4>
+                <p class="small text-muted">{{ platform.desc }}</p>
+                <div class="visit-badge">Visitar</div>
+              </b-card>
+            </a>
           </b-col>
         </b-row>
       </b-container>
     </section>
 
-    <!-- Eventos recientes -->
     <section class="py-5">
       <b-container>
-        <h2 class="text-center mb-4">Eventos recientes</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="section-title mb-0">Eventos Recientes</h2>
+          <router-link to="/events" class="btn btn-outline-success btn-sm">Ver todos</router-link>
+        </div>
         <b-row class="g-4">
           <b-col
             md="4"
-            v-for="event in events"
+            v-for="event in events.slice(0, 3)" 
             :key="event.title"
             data-aos="fade-up"
           >
-            <b-card :title="event.title" class="h-100 hover-card">
-              <font-awesome-icon :icon="event.icon" size="3x" class="mb-3" />
-              <p>{{ event.desc }}</p>
-              <small class="text-muted">{{ event.date }}</small>
+            <b-card class="h-100 event-card border-0">
+              <div class="d-flex align-items-center mb-3">
+                <font-awesome-icon :icon="event.icon" size="2x" class="me-3 text-success" />
+                <h5 class="mb-0">{{ event.title }}</h5>
+              </div>
+              <p class="text-secondary small">{{ event.desc }}</p>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <small class="text-warning font-weight-bold">{{ event.date }}</small>
+                <span class="badge-status" :class="event.status">{{ event.status }}</span>
+              </div>
             </b-card>
           </b-col>
         </b-row>
       </b-container>
     </section>
 
-    <!-- Tienda destacada -->
-    <section class="py-5 bg-light">
+    <section class="py-5 bg-dark-section">
       <b-container>
-        <h2 class="text-center mb-4">Tienda destacada</h2>
+        <h2 class="text-center section-title mb-5">Tienda Destacada</h2>
         <b-row class="g-4">
           <b-col
             md="3"
+            sm="6"
             v-for="product in featuredProducts"
             :key="product.name"
-            data-aos="fade-up"
+            data-aos="flip-left"
           >
-            <b-card :title="product.name" class="text-center h-100 hover-card">
-              <img
-                :src="product.img"
-                :alt="product.name"
-                class="mb-3"
-                style="height: 120px; object-fit: cover"
-              />
-              <p>{{ product.desc }}</p>
-              <b-button variant="warning">Comprar</b-button>
+            <b-card class="text-center h-100 product-card border-0">
+              <div class="product-img-container mb-3">
+                <img :src="product.img" :alt="product.name" class="img-fluid product-img" />
+              </div>
+              <h5 class="text-white">{{ product.name }}</h5>
+              <p class="small text-muted mb-3">{{ product.desc }}</p>
+              <b-button variant="success" class="w-100">Comprar ahora</b-button>
             </b-card>
           </b-col>
         </b-row>
@@ -80,37 +86,25 @@
 </template>
 
 <script setup>
+// Tu lógica de script se mantiene igual, está muy bien planteada.
+// Solo asegúrate de que el event.status (live, upcoming, past) venga en tu JSON.
 import Hero from "@/components/Hero.vue";
-
-// JSON data
 import rawProducts from "@/data/products.json";
 import rawEvents from "@/data/events.json";
 import platformsData from "@/data/platforms.json";
-
-// Font Awesome icons
 import { 
   faYoutube, faTwitch, faTiktok, faTwitter, faInstagram, faDiscord 
 } from "@fortawesome/free-brands-svg-icons";
 
-// -----------------------------
-// Products
-// -----------------------------
 const products = rawProducts.map(p => ({
   ...p,
   img: new URL(`../assets/img/${p.img}`, import.meta.url).href
 }));
-const featuredProducts = products.slice(0, 4); // show first 4
+const featuredProducts = products.slice(0, 4);
 
-// -----------------------------
-// Platforms
-// -----------------------------
 const platformIconMap = {
-  youtube: faYoutube,
-  twitch: faTwitch,
-  tiktok: faTiktok,
-  twitter: faTwitter,
-  instagram: faInstagram,
-  discord: faDiscord,
+  youtube: faYoutube, twitch: faTwitch, tiktok: faTiktok,
+  twitter: faTwitter, instagram: faInstagram, discord: faDiscord,
 };
 
 const platforms = platformsData.map(p => ({
@@ -118,15 +112,7 @@ const platforms = platformsData.map(p => ({
   icon: platformIconMap[p.icon.toLowerCase()] || faYoutube
 }));
 
-// -----------------------------
-// Events
-// -----------------------------
-const eventIconMap = {
-  twitch: faTwitch,
-  tiktok: faTiktok,
-  discord: faDiscord
-};
-
+const eventIconMap = { twitch: faTwitch, tiktok: faTiktok, discord: faDiscord };
 const events = rawEvents.map(e => ({
   ...e,
   icon: eventIconMap[e.icon.toLowerCase()] || faTwitch
@@ -134,26 +120,63 @@ const events = rawEvents.map(e => ({
 </script>
 
 <style scoped>
-h2 {
-  color: #111;
-  font-weight: 700;
+.home-page {
+  background-color: #121212; /* Fondo general más oscuro */
 }
 
-/* Cards hover */
-.hover-card {
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-  background-color: var(--dark-bg);
-  color: var(--text-color);
+.section-title {
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.hover-card:hover {
+.bg-dark-section {
+  background-color: #1a1a1a;
+}
+
+/* Platform Cards Custom */
+.platform-card {
+  background: #252525;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent !important;
+}
+.platform-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+  background: #333;
+  border-bottom: 3px solid #42b883 !important;
 }
 
-/* Secciones */
-section {
-  scroll-margin-top: 70px; /* si navbar fijo */
+/* Icon Colors */
+.icon-twitch { color: #9146ff; }
+.icon-youtube { color: #ff0000; }
+.icon-discord { color: #5865f2; }
+.icon-tiktok { color: #00f2ea; }
+
+/* Product Images */
+.product-img-container {
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fff;
+  padding: 10px;
 }
+.product-img {
+  transition: transform 0.5s ease;
+  height: 150px;
+  object-fit: contain;
+}
+.product-card:hover .product-img {
+  transform: scale(1.1);
+}
+
+/* Badges */
+.badge-status {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.live { background: #ff4b2b; color: white; }
+.past { background: #444; color: #bbb; }
 </style>

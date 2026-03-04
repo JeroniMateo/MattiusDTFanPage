@@ -12,7 +12,7 @@ const routes = [
     name: "About",
     component: About,
   },
-  { path: "/eventos", name: "Events", component: Events },
+  { path: "/events", name: "Events", component: Events },
   { path: "/shop", name: "Shop", component: Shop },
   { path: "/platforms", name: "Platforms", component: Platforms },
 ];
