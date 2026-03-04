@@ -55,7 +55,7 @@ const platforms = [
     name: "YouTube",
     icon: faYoutube,
     desc: "Gameplays y deportes",
-    link: "https://www.youtube.com/@thewildhouse4609",
+    link: "https://www.youtube.com/@thewildhouse63",
   },
   {
     name: "Twitch",
