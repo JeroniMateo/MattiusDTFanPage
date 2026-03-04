@@ -49,7 +49,7 @@ import profileImg from '@/assets/img/logo.webp'
 <style scoped>
 .about-header {
   height: 40vh;
-  background: url('@/assets/img/about-bg.webp') center/cover no-repeat;
+  background: url('../assets/img/about-bg.webp') center/cover no-repeat;
   color: #fff;
   display: flex;
   align-items: center;

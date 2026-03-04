@@ -107,7 +107,7 @@ const filteredEvents = computed(() => {
 /* HERO */
 .events-hero {
   height: 35vh;
-  background: url('@/assets/img/events-bg.webp') center/cover no-repeat;
+  background: url('../assets/img/events-bg.webp') center/cover no-repeat;
   color: #fff;
   text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
 }

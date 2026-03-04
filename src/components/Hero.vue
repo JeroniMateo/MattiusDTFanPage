@@ -16,7 +16,7 @@
 <style scoped>
 .hero {
   height: 80vh;
-  background-image: url('@/assets/img/hero-bg.webp');
+  background-image: url('../assets/img/hero-bg.webp');
   background-attachment: fixed; /* efecto parallax */
   background-position: center;
   background-size: cover;
