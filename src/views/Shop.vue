@@ -18,7 +18,12 @@
             <SearchBar @search="handleSearch" />
           </div>
 
-          <div v-if="paginatedProducts.length > 0">
+          <div v-if="loading" class="text-center py-5">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="text-muted mt-3">SINCRONIZANDO INVENTARIO...</p>
+          </div>
+
+          <div v-else-if="paginatedProducts.length > 0">
             <ProductList :products="paginatedProducts" @buy="handleBuy" />
             
             <div class="d-flex justify-content-center mt-5">
@@ -44,11 +49,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useCartStore } from '@/stores/cart.js';
-import rawProducts from '@/data/products.json';
+import { supabase } from '@/lib/supabase'; // Importamos el cliente que creaste
 
-// COMPONENTES - Asegúrate de que las rutas sean correctas
+// COMPONENTES
 import SearchBar from '@/components/shop/SearchBar.vue';
 import ShopFilters from '@/components/shop/ShopFilters.vue';
 import ProductList from '@/components/shop/ProductList.vue';
@@ -61,24 +66,46 @@ const activeFilters = ref({});
 const currentPage = ref(1);
 const perPage = 6;
 
-// MAPEO SEGURO DE IMÁGENES
-const products = rawProducts.map(p => {
-  let imgUrl;
+// ESTADOS PARA DATOS DINÁMICOS
+const rawProductsFromDB = ref([]);
+const loading = ref(true);
+
+// CARGA DE DATOS DESDE SUPABASE
+const fetchProducts = async () => {
+  loading.value = true;
   try {
-    // Usamos el constructor de URL de Vite
-    imgUrl = new URL(`../assets/img/${p.image}`, import.meta.url).href;
-    
-    // Si la URL generada termina en 'undefined', es que falló
-    if (imgUrl.includes('undefined')) throw new Error();
-  } catch (e) {
-    // Imagen por defecto si la del JSON falla (IMPORTANTE: logo.webp debe existir)
-    imgUrl = new URL(`../assets/img/logo.webp`, import.meta.url).href;
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .order('id', { ascending: true });
+
+    if (error) throw error;
+
+    // MAPEO DE IMÁGENES (Mantenemos tu lógica de assets locales)
+    rawProductsFromDB.value = data.map(p => {
+      let imgUrl;
+      try {
+        imgUrl = new URL(`../assets/img/${p.image}`, import.meta.url).href;
+        if (imgUrl.includes('undefined')) throw new Error();
+      } catch (e) {
+        imgUrl = new URL(`../assets/img/logo.webp`, import.meta.url).href;
+      }
+      return { ...p, image: imgUrl };
+    });
+  } catch (err) {
+    console.error('Error en Supabase:', err.message);
+  } finally {
+    loading.value = false;
   }
-  return { ...p, image: imgUrl };
+};
+
+onMounted(() => {
+  fetchProducts();
 });
 
+// LÓGICA DE FILTRADO (Ahora usa los datos de la DB)
 const filteredProducts = computed(() => {
-  let res = [...products];
+  let res = [...rawProductsFromDB.value];
   if (searchQuery.value) {
     res = res.filter(p => p.name.toLowerCase().includes(searchQuery.value.toLowerCase()));
   }
@@ -99,7 +126,94 @@ const handleBuy = (p) => { cart.addItem(p); };
 </script>
 
 <style scoped>
-.bg-dark-page { background-color: #0a0a0a; }
-.filter-sidebar { background: #1a1a1a; border-radius: 12px; border: 1px solid #333; color: white; }
-.no-results { background: #1a1a1a; border-radius: 15px; border: 1px dashed #444; }
+/* FONDO Y CONTENEDOR PRINCIPAL */
+.bg-dark-page { 
+  background-color: #0a0a0a; 
+  background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+/* TÍTULO PRINCIPAL */
+h1 {
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(66, 184, 131, 0.3);
+}
+
+/* SIDEBAR DE FILTROS */
+.filter-sidebar { 
+  background: #141414; 
+  border-radius: 16px; 
+  border: 1px solid #222; 
+  color: white; 
+  position: sticky;
+  top: 20px;
+  transition: border-color 0.3s ease;
+}
+
+.filter-sidebar:hover {
+  border-color: #42b883;
+}
+
+/* BARRA DE BÚSQUEDA */
+.search-bar-wrapper {
+  background: #141414;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #222;
+}
+
+/* ESTADO SIN RESULTADOS */
+.no-results { 
+  background: #141414; 
+  border-radius: 20px; 
+  border: 2px dashed #333; 
+  transition: all 0.3s ease;
+}
+
+.no-results h3 {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* CARGANDO (SPINNER) */
+.spinner-border { 
+  width: 4rem; 
+  height: 4rem; 
+  border-width: 0.3em;
+  filter: drop-shadow(0 0 10px #42b883);
+}
+
+/* PAGINACIÓN CUSTOM (Si usas clases de Bootstrap o tu componente) */
+:deep(.pagination .page-link) {
+  background-color: #1a1a1a;
+  border-color: #333;
+  color: #fff;
+  transition: all 0.2s;
+}
+
+:deep(.pagination .page-link:hover) {
+  background-color: #42b883;
+  color: #000;
+}
+
+:deep(.pagination .active .page-link) {
+  background-color: #42b883;
+  border-color: #42b883;
+  color: #000;
+}
+
+/* RESPONSIVE */
+@media (max-width: 991.98px) {
+  .filter-sidebar {
+    position: static;
+    margin-bottom: 2rem;
+  }
+}
+
+/* ANIMACIONES AOS AJUSTES */
+[data-aos] {
+  pointer-events: none;
+}
+.aos-animate {
+  pointer-events: auto;
+}
 </style>
