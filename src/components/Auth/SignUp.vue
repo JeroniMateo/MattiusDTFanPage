@@ -83,16 +83,20 @@ const handleSignup = async () => {
     alert("Las contraseñas no coinciden");
     return;
   }
+  
 
   loading.value = true;
   try {
     // Nota: Aquí pasas el email, password y un objeto con el resto de metadatos (username, etc)
-    await auth.signUp(form.value.email, form.value.password, {
-      username: form.value.username,
-      full_name: form.value.fullName,
-      phone: form.value.phone,
-      birth_date: form.value.birthDate
-    });
+    // Dentro de SignUp.vue, en la función handleSignup:
+// En tu función handleSignup:
+await auth.signUp(form.value.email, form.value.password, {
+  username: form.value.username,
+  full_name: form.value.fullName,
+  email: form.value.email, // <--- Añadirlo aquí también por redundancia
+  phone: form.value.phone,
+  birth_date: form.value.birthDate
+});
     alert("¡Registro enviado! Revisa tu correo para confirmar.");
     router.push('/login');
   } catch (error) {

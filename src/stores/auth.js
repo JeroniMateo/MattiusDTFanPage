@@ -4,49 +4,69 @@ import { supabase } from '@/lib/supabase';
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
+    profile: null,
   }),
+  getters: {
+    // Esto devolverá el email del perfil si existe, o el del usuario auth
+    userEmail: (state) => state.profile?.email || state.user?.email,
+    // Útil para el Navbar
+    displayName: (state) => state.profile?.username || state.user?.email?.split('@')[0]
+  },
   actions: {
-    // Escuchar cambios en la sesión (Login, Logout, Registro)
-    initialize() {
-      // Obtener sesión actual al cargar
-      supabase.auth.getSession().then(({ data: { session } }) => {
+    async initialize() {
+      const { data: { session } } = await supabase.auth.getSession();
+      this.user = session?.user ?? null;
+      if (this.user) await this.fetchProfile();
+
+      // Escuchar cambios (login/logout)
+      supabase.auth.onAuthStateChange(async (event, session) => {
         this.user = session?.user ?? null;
-      });
-
-      // Escuchar cambios en tiempo real
-      supabase.auth.onAuthStateChange((_event, session) => {
-        this.user = session?.user ?? null;
-      });
-    },
-
-    // Función para Iniciar Sesión
-    async signIn(email, password) {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      if (error) throw error;
-      this.user = data.user;
-    },
-
-    // Función para Registrarse
-    async signUp(email, password, metadata) {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: metadata // Aquí guardamos el username, teléfono, etc.
+        if (this.user) {
+          await this.fetchProfile();
+        } else {
+          this.profile = null;
         }
       });
-      if (error) throw error;
-      this.user = data.user;
     },
 
-    // Cerrar Sesión
-    async signOut() {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      this.user = null;
+    async fetchProfile() {
+      if (!this.user) return;
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', this.user.id)
+        .single();
+      
+      if (!error) this.profile = data;
     },
-  },
+
+// Dentro de src/stores/auth.js -> actions:
+async signUp(email, password, metadata) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: metadata 
+    }
+  });
+  if (error) throw error;
+  
+  this.user = data.user;
+  // Opcional: Llenamos el perfil localmente para que la UI no parpadee
+  this.profile = { id: data.user.id, email, ...metadata };
+},
+
+    async signIn(email, password) {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      this.user = data.user;
+      await this.fetchProfile();
+    },
+
+    async signOut() {
+      await supabase.auth.signOut();
+      this.user = null;
+      this.profile = null;
+    }
+  }
 });
