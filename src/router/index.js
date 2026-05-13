@@ -15,6 +15,17 @@ const routes = [
   { path: "/events", name: "Events", component: Events },
   { path: "/shop", name: "Shop", component: Shop },
   { path: "/platforms", name: "Platforms", component: Platforms },
+  {
+      path: '/login',
+      name: 'login',
+      // Ajusta la ruta según dónde hayas guardado el archivo realmente
+      component: () => import('@/components/Auth/Login.vue')
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: () => import('@/components/Auth/SignUp.vue')
+    }
 ];
 
 const router = createRouter({

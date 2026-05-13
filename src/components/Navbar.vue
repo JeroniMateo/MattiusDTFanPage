@@ -2,12 +2,7 @@
   <b-navbar toggleable="lg" type="dark" class="custom-navbar sticky-top">
     <b-container>
       <b-navbar-brand to="/" class="d-flex align-items-center brand-container">
-        <img
-          :src="logo"
-          alt="Mattius DT"
-          height="45"
-          class="logo-img"
-        />
+        <img :src="logo" alt="Mattius DT" height="45" class="logo-img" />
         <span class="ms-2 fw-bold brand-text">MATTIUS <span class="text-white">DT</span></span>
       </b-navbar-brand>
 
@@ -24,6 +19,35 @@
             <font-awesome-icon icon="shopping-cart" class="me-1" />
             Tienda
           </b-nav-item>
+
+          <!-- SECCIÓN DE USUARIO DINÁMICA -->
+          <template v-if="!auth.user">
+            <!-- Botón Login (Estilo texto simple) -->
+            <b-nav-item to="/login" class="nav-link-custom ms-lg-3">LOGIN</b-nav-item>
+            
+            <!-- Botón Unirse (Estilo botón delineado) -->
+            <b-nav-item to="/signup" class="nav-link-auth-btn ms-lg-2">
+              UNIRSE
+            </b-nav-item>
+          </template>
+
+          <!-- DROPDOWN CUANDO ESTÁ LOGUEADO -->
+          <b-nav-item-dropdown v-else right no-caret class="nav-link-user ms-lg-4">
+            <template #button-content>
+              <div class="user-avatar-container">
+                <font-awesome-icon icon="user" class="text-white" />
+              </div>
+            </template>
+            <b-dropdown-header class="small text-muted">
+              HOLA, {{ auth.user.email.split('@')[0].toUpperCase() }}
+            </b-dropdown-header>
+            <b-dropdown-item to="/profile">MI PERFIL</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item @click="handleLogout" class="text-danger">
+              <font-awesome-icon icon="sign-out-alt" class="me-2" /> CERRAR SESIÓN
+            </b-dropdown-item>
+          </b-nav-item-dropdown>
+
         </b-navbar-nav>
       </b-collapse>
     </b-container>
@@ -31,11 +55,25 @@
 </template>
 
 <script setup>
+import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
 import logo from "@/assets/img/logo.webp";
+
+const auth = useAuthStore();
+const router = useRouter();
+
+const handleLogout = async () => {
+  try {
+    await auth.signOut();
+    router.push("/");
+  } catch (error) {
+    console.error("Error al salir:", error.message);
+  }
+};
 </script>
 
 <style scoped>
-/* Efecto Glassmorphism y Fondo */
+/* --- TUS ESTILOS EXISTENTES --- */
 .custom-navbar {
   background-color: rgba(18, 18, 18, 0.95) !important;
   backdrop-filter: blur(10px);
@@ -43,24 +81,15 @@ import logo from "@/assets/img/logo.webp";
   padding: 0.8rem 0;
   transition: all 0.3s ease;
 }
-
-/* Estilo del Logo */
 .brand-text {
   font-size: 1.4rem;
   letter-spacing: 1px;
   color: #ffa500;
   text-shadow: 0 0 10px rgba(255, 165, 0, 0.3);
 }
+.logo-img { transition: transform 0.3s ease; }
+.brand-container:hover .logo-img { transform: rotate(10deg) scale(1.1); }
 
-.logo-img {
-  transition: transform 0.3s ease;
-}
-
-.brand-container:hover .logo-img {
-  transform: rotate(10deg) scale(1.1);
-}
-
-/* Links Personalizados */
 .nav-link-custom :deep(.nav-link) {
   color: #ccc !important;
   font-weight: 600;
@@ -70,28 +99,9 @@ import logo from "@/assets/img/logo.webp";
   transition: color 0.3s ease;
   position: relative;
 }
+.nav-link-custom :deep(.nav-link):hover { color: #ffa500 !important; }
+.nav-link-custom :deep(.router-link-active) { color: #ffa500 !important; }
 
-.nav-link-custom :deep(.nav-link):hover {
-  color: #ffa500 !important;
-}
-
-/* Indicador de página activa */
-.nav-link-custom :deep(.router-link-active) {
-  color: #ffa500 !important;
-}
-
-.nav-link-custom :deep(.router-link-active)::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: #ffa500;
-  box-shadow: 0 0 8px #ffa500;
-}
-
-/* Botón Tienda Destacado */
 .nav-link-shop :deep(.nav-link) {
   background: #ffa500;
   color: #000 !important;
@@ -102,20 +112,53 @@ import logo from "@/assets/img/logo.webp";
   box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
 }
 
-.nav-link-shop :deep(.nav-link):hover {
-  background: #fff;
-  transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.4);
+/* --- NUEVOS ESTILOS PARA AUTH --- */
+.nav-link-auth-btn :deep(.nav-link) {
+  border: 2px solid #ffa500;
+  color: #ffa500 !important;
+  padding: 6px 20px !important;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+.nav-link-auth-btn :deep(.nav-link):hover {
+  background: #ffa500;
+  color: #000 !important;
 }
 
-/* Ajuste para móviles */
+.user-avatar-container {
+  width: 35px;
+  height: 35px;
+  background: #222;
+  border: 1px solid #ffa500;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.user-avatar-container:hover {
+  box-shadow: 0 0 10px #ffa500;
+}
+
+:deep(.dropdown-menu) {
+  background: #111;
+  border: 1px solid #333;
+}
+:deep(.dropdown-item) {
+  color: #ccc;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+:deep(.dropdown-item:hover) {
+  background: #ffa500;
+  color: #000;
+}
+
 @media (max-width: 991px) {
-  .nav-link-custom :deep(.nav-link) {
-    padding: 10px 0;
-    border-bottom: 1px solid #333;
-  }
-  .nav-link-shop {
-    margin-top: 15px;
+  .nav-link-shop, .nav-link-auth-btn {
+    margin: 10px 0;
     width: 100%;
     text-align: center;
   }
