@@ -21,7 +21,10 @@ import {
   faFilter, faSearch, faShoppingCart, faSearchMinus, faTimes, 
   faPlus, faMinus, faGhost, faCartPlus, faTrashAlt, faInfoCircle,
   faAnglesLeft, faAnglesRight, faChevronLeft, faChevronRight,
-  faCalendarAlt, faExternalLinkAlt // <--- ESTOS FALTABAN
+  faCalendarAlt, faExternalLinkAlt,
+  faUser,          // <-- IMPORTADO AQUÍ 🚀
+  faSignOutAlt,    // <-- IMPORTADO AQUÍ 🚀
+  faShieldAlt      // <-- IMPORTADO AQUÍ (Para el título del Checkout) 🚀
 } from "@fortawesome/free-solid-svg-icons";
 
 // AÑADIR TODOS A LA LIBRERÍA
@@ -30,7 +33,10 @@ library.add(
   faFilter, faSearch, faShoppingCart, faSearchMinus, faTimes, 
   faPlus, faMinus, faGhost, faCartPlus, faTrashAlt, faInfoCircle,
   faAnglesLeft, faAnglesRight, faChevronLeft, faChevronRight,
-  faCalendarAlt, faExternalLinkAlt // <--- AÑADIDOS AQUÍ TAMBIÉN
+  faCalendarAlt, faExternalLinkAlt,
+  faUser,          // <-- AÑADIDO AQUÍ TAMBIÉN 🚀
+  faSignOutAlt,    // <-- AÑADIDO AQUÍ TAMBIÉN 🚀
+  faShieldAlt      // <-- AÑADIDO AQUÍ TAMBIÉN 🚀
 );
 
 const app = createApp(App);

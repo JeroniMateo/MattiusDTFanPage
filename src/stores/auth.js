@@ -40,29 +40,36 @@ export const useAuthStore = defineStore('auth', {
       if (!error) this.profile = data;
     },
 
-// Dentro de src/stores/auth.js -> actions:
-async signUp(email, password, metadata) {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: metadata 
-    }
-  });
-  if (error) throw error;
-  
-  this.user = data.user;
-  // Opcional: Llenamos el perfil localmente para que la UI no parpadee
-  this.profile = { id: data.user.id, email, ...metadata };
-},
+    async signUp(email, password, metadata) {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: metadata 
+        }
+      });
+      if (error) throw error;
+      
+      this.user = data.user;
+      // Opcional: Llenamos el perfil localmente para que la UI no parpadee
+      this.profile = { id: data.user.id, email, ...metadata };
+    },
 
     async signIn(email, password) {
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      // Aplicamos .trim() para limpiar espacios al principio o al final del correo
+      const cleanEmail = email ? email.trim() : ''; 
+      
+      const { data, error } = await supabase.auth.signInWithPassword({ 
+        email: cleanEmail, 
+        password 
+      });
+      
       if (error) throw error;
       this.user = data.user;
       await this.fetchProfile();
     },
 
+    // ¡Recuperamos el signOut que faltaba! 🚀
     async signOut() {
       await supabase.auth.signOut();
       this.user = null;

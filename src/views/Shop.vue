@@ -209,11 +209,4 @@ h1 {
   }
 }
 
-/* ANIMACIONES AOS AJUSTES */
-[data-aos] {
-  pointer-events: none;
-}
-.aos-animate {
-  pointer-events: auto;
-}
 </style>

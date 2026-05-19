@@ -9,25 +9,27 @@
 
     <b-offcanvas v-model="showCart" title="MY CART" placement="end" body-class="bg-dark-gaming p-0" header-class="bg-dark-gaming text-success border-bottom border-secondary py-4">
       <div class="d-flex flex-column h-100">
+        
         <div v-if="cart.items.length > 0" class="flex-grow-1 overflow-auto p-3 custom-scrollbar">
-          <div v-for="item in cart.items" :key="item.id" class="cart-item-gaming mb-3 p-2">
+          <div v-for="item in cart.items" :key="item.product.id" class="cart-item-gaming mb-3 p-2">
             <div class="d-flex align-items-center">
-              <img :src="item.image" class="item-img-small me-3" />
+              <img :src="item.product.image" class="item-img-small me-3" />
               <div class="flex-grow-1">
-                <h6 class="mb-0 text-white fw-bold text-truncate" style="max-width: 140px;">{{ item.name }}</h6>
-                <div class="text-success small fw-bold">{{ item.price }}€</div>
+                <h6 class="mb-0 text-white fw-bold text-truncate" style="max-width: 140px;">{{ item.product.name }}</h6>
+                <div class="text-success small fw-bold">{{ item.product.price }}€</div>
               </div>
-              <b-button variant="link" class="text-danger p-1" @click="cart.removeItem(item.id)">
+              <b-button variant="link" class="text-danger p-1" @click="cart.removeItem(item.product.id)">
                 <font-awesome-icon icon="times" />
               </b-button>
             </div>
+            
             <div class="d-flex justify-content-between align-items-center mt-2 px-2 py-1 bg-black-25 rounded border border-secondary">
               <div class="d-flex align-items-center">
-                <button class="btn-qty" @click="cart.decreaseItem(item.id)">-</button>
+                <button class="btn-qty" @click="cart.removeItem(item.product.id)">-</button>
                 <span class="mx-3 text-white fw-bold">{{ item.quantity }}</span>
-                <button class="btn-qty" @click="cart.addItem(item)">+</button>
+                <button class="btn-qty" @click="cart.addItem(item.product)">+</button>
               </div>
-              <span class="text-muted small">{{ ((item.price || 0) * (item.quantity || 0)).toFixed(2) }}€</span>
+              <span class="text-muted small">{{ ((item.product.price || 0) * (item.quantity || 0)).toFixed(2) }}€</span>
             </div>
           </div>
         </div>
@@ -39,11 +41,11 @@
 
         <div class="cart-footer p-4 border-top border-secondary bg-black">
           <div class="d-flex justify-content-between mb-3">
-            <span class="text-muted h6 mb-0">TOTAL_VALOR:</span>
+            <span class="text-muted h6 mb-0">TOTAL VALOR:</span>
             <span class="h4 mb-0 text-success fw-bold">{{ (cart.totalPrice || 0).toFixed(2) }}€</span>
           </div>
-          <b-button variant="success" class="w-100 fw-bold py-3 neon-btn" :disabled="cart.items.length === 0" @click="checkout">
-            FINALIZAR_PEDIDO
+          <b-button variant="success" class="w-100 fw-bold py-3 neon-btn" :disabled="cart.items.length === 0" @click="handleCheckout">
+            FINALIZAR PEDIDO
           </b-button>
         </div>
       </div>
@@ -54,9 +56,27 @@
 <script setup>
 import { ref } from 'vue';
 import { useCartStore } from '@/stores/cart.js';
+import { useAuthStore } from '@/stores/auth.js';
+import { useRouter } from 'vue-router'; // <-- 1. ¡ASEGÚRATE DE QUE ESTÁ IMPORTADO!
+
 const cart = useCartStore();
+const auth = useAuthStore();
+const router = useRouter(); // <-- 2. ¡ASEGÚRATE DE QUE ESTÁ DECLARADO!
 const showCart = ref(false);
-const checkout = () => alert('¡Pedido enviado al sistema!');
+
+const handleCheckout = () => {
+  // Verificamos si el usuario está autenticado
+  if (!auth.user) {
+    alert('⚠️ ¡Debes iniciar sesión para finalizar tu pedido!');
+    showCart.value = false; // Cerramos el panel lateral
+    router.push('/login');  // Redirigimos al Login
+    return;
+  }
+
+  // Si está autenticado:
+  showCart.value = false;   // 1. Cerramos el panel lateral para que no tape la pantalla
+  router.push('/checkout'); // 2. ¡Saltamos directos a la nueva vista de pago estilo Amazon!
+};
 </script>
 
 <style scoped>
